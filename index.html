@@ -811,7 +811,11 @@ function renderTotal(){
 function renderHeader(){
   const p=cur;
   document.getElementById('p-avatar').textContent=String(p+1).padStart(2,'0');
-  document.getElementById('p-name-edit').value=names[p];
+  const inp=document.getElementById('p-name-edit');
+  // Only update the input value if it's not currently focused (user is not typing)
+  if(document.activeElement !== inp){
+    inp.value=names[p];
+  }
   const done=scores[p].every(s=>s>0);
   document.getElementById('p-sub').textContent=done?'✓ Semua kategori telah dinilai':'Pilih markah untuk setiap kategori di bawah';
 
@@ -856,9 +860,11 @@ function render(){
   renderHeader(); renderList(); renderCats(); renderTotal(); renderLeaderboard();
 }
 
-document.getElementById('p-name-edit').oninput=function(){
-  names[cur]=this.value; renderList(); renderLeaderboard();
-};
+document.getElementById('p-name-edit').addEventListener('input', function(){
+  names[cur] = this.value;
+  renderList();
+  renderLeaderboard();
+});
 
 function exportCSV(){
   const juri=document.getElementById('juri-name').value||'Juri';
