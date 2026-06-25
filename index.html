@@ -236,7 +236,7 @@ html, body {
   padding: 18px 20px;
   box-shadow: var(--shadow-card);
   display: flex; align-items: center; gap: 16px;
-  position: relative; overflow: hidden;
+  position: relative;
 }
 .p-header::before {
   content: '';
@@ -262,6 +262,12 @@ html, body {
   border-bottom: 1.5px solid var(--border);
   padding: 2px 0; width: 100%;
   transition: border-color 0.2s;
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+  /* prevent iOS from disabling tap on transparent inputs */
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 }
 .p-name-edit:focus { border-bottom-color: var(--accent); }
 .p-sub { font-size: 11px; color: var(--text-3); margin-top: 5px; }
@@ -579,7 +585,20 @@ html, body {
   /* Peserta header */
   .p-header { padding: 14px 14px; gap: 12px; }
   .p-avatar { width: 46px; height: 46px; font-size: 16px; }
-  .p-name-edit { font-size: 16px; }
+  .p-name-edit {
+    font-size: 15px;
+    /* bigger tap target and visible border so user knows it's editable */
+    padding: 6px 8px;
+    border: 1.5px solid var(--border-md);
+    border-radius: 8px;
+    background: var(--bg-raised);
+    margin-bottom: 2px;
+  }
+  .p-name-edit:focus {
+    border-color: var(--accent);
+    background: rgba(192,132,252,0.07);
+    outline: none;
+  }
   .nav-btns { display: none; } /* hidden: use bottom nav instead */
 
   /* Mobile bottom nav */
