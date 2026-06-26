@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistem Penilaian Peragaan Pakaian</title>
+<title>Sistem Penilaian</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
@@ -25,16 +25,15 @@
   --gold-dim:   rgba(245,158,11,0.15);
   --silver:     #94a3b8;
   --bronze:     #cd7f32;
-  --c0:        #f59e0b;
-  --c0-bg:     rgba(245,158,11,0.1);
-  --c0-border: rgba(245,158,11,0.35);
   --c1:        #34d399;
   --c1-bg:     rgba(52,211,153,0.08);
   --c1-border: rgba(52,211,153,0.3);
   --c2:        #60a5fa;
   --c2-bg:     rgba(96,165,250,0.08);
   --c2-border: rgba(96,165,250,0.3);
-  --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
+  --c3:        #f472b6;
+  --c3-bg:     rgba(244,114,182,0.08);
+  --c3-border: rgba(244,114,182,0.3);
   --shadow-3d:  0 8px 24px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
   --shadow-card:0 12px 32px rgba(0,0,0,0.7), 0 4px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
   --sidebar-w: 260px;
@@ -42,137 +41,121 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html, body {
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-base);
-  color: var(--text-1);
-}
-
+html, body { height: 100%; font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-1); }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-md); border-radius: 2px; }
 
 /* ── HEADER ── */
 .header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+  position: fixed; top: 0; left: 0; right: 0;
   height: var(--header-h);
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
   padding: 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: flex; align-items: center; gap: 12px;
   z-index: 100;
   box-shadow: 0 2px 20px rgba(0,0,0,0.6);
 }
 .header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0; height: 1px;
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
   pointer-events: none;
 }
 .header-icon {
   width: 38px; height: 38px; border-radius: 11px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(192,132,252,0.3);
+  background: var(--accent-dim); border: 1px solid rgba(192,132,252,0.3);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  box-shadow: 0 0 14px var(--accent-glow);
-  flex-shrink: 0;
+  font-size: 18px; box-shadow: 0 0 14px var(--accent-glow); flex-shrink: 0;
 }
 .header-info { flex: 1; min-width: 0; }
-.header-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px; font-weight: 600; color: var(--text-1);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
+.header-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .header-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 
 .juri-field {
   display: flex; align-items: center; gap: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-md);
-  border-radius: 10px;
-  padding: 6px 12px;
-  flex-shrink: 0;
+  background: var(--bg-card); border: 1px solid var(--border-md);
+  border-radius: 10px; padding: 6px 12px; flex-shrink: 0;
 }
 .juri-field label { font-size: 11px; color: var(--text-3); white-space: nowrap; }
 .juri-field input {
   background: transparent; border: none; outline: none;
   font-size: 13px; font-weight: 500; color: var(--text-1);
-  font-family: 'Inter', sans-serif;
-  width: 140px;
+  font-family: 'Inter', sans-serif; width: 140px;
 }
 .juri-field input::placeholder { color: var(--text-3); }
 
 .menu-toggle {
-  display: none;
-  width: 36px; height: 36px; border-radius: 9px;
-  border: 1px solid var(--border-md);
-  background: var(--bg-card);
-  color: var(--text-2);
-  font-size: 18px; cursor: pointer;
-  align-items: center; justify-content: center;
-  flex-shrink: 0;
+  display: none; width: 36px; height: 36px; border-radius: 9px;
+  border: 1px solid var(--border-md); background: var(--bg-card);
+  color: var(--text-2); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center; flex-shrink: 0;
 }
+
+/* ── TAB BAR ── */
+.tab-bar {
+  position: fixed; top: var(--header-h); left: 0; right: 0;
+  height: 46px; background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: stretch;
+  padding: 0 20px; gap: 4px;
+  z-index: 99;
+}
+.tab-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 0 16px; border: none; background: none;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--text-3); cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s; white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text-2); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-badge {
+  font-size: 10px; font-weight: 600; padding: 2px 6px;
+  border-radius: 10px; background: var(--bg-raised);
+  color: var(--text-3); min-width: 20px; text-align: center;
+}
+.tab-btn.active .tab-badge { background: var(--accent-dim); color: var(--accent); }
 
 /* ── LAYOUT ── */
 .app-body {
   display: flex;
-  padding-top: var(--header-h);
-  height: 100vh;
-  height: 100dvh;
+  padding-top: calc(var(--header-h) + 46px);
+  height: 100vh; height: 100dvh;
   overflow: hidden;
 }
 
-/* ── OVERLAY — CRITICAL: pointer-events:none until active ── */
 .overlay {
-  display: none; /* hidden by default, JS sets display:block when needed */
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(2px);
-  z-index: 50;
-  pointer-events: none; /* never blocks clicks when not active */
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+  z-index: 50; pointer-events: none;
 }
-.overlay.active {
-  pointer-events: auto; /* only intercept clicks when sidebar is open */
-}
+.overlay.active { pointer-events: auto; }
 
 /* ── SIDEBAR ── */
 .sidebar {
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  background: var(--bg-surface);
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column;
-  overflow: hidden;
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--bg-surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow: hidden;
 }
 .sidebar-head {
   padding: 14px 16px 12px;
   font-size: 10px; font-weight: 600; color: var(--text-3);
   text-transform: uppercase; letter-spacing: 0.8px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
   display: flex; align-items: center; justify-content: space-between;
 }
 .sidebar-close {
-  display: none;
-  background: none; border: none;
-  color: var(--text-3); font-size: 20px;
-  cursor: pointer; line-height: 1; padding: 0 2px;
+  display: none; background: none; border: none;
+  color: var(--text-3); font-size: 20px; cursor: pointer; line-height: 1; padding: 0 2px;
 }
 .peserta-list { flex: 1; overflow-y: auto; padding: 8px; }
 .p-row {
   display: flex; align-items: center; gap: 9px;
   padding: 8px 10px; border-radius: 9px;
   cursor: pointer; border: 1px solid transparent;
-  transition: all 0.15s; margin-bottom: 2px;
-  user-select: none;
+  transition: all 0.15s; margin-bottom: 2px; user-select: none;
 }
 .p-row:hover { background: var(--bg-hover); }
 .p-row.active { background: var(--bg-raised); border-color: var(--border-md); }
@@ -180,13 +163,13 @@ html, body {
   width: 28px; height: 28px; border-radius: 7px;
   background: var(--bg-raised); border: 1px solid var(--border);
   font-size: 11px; font-weight: 600; color: var(--text-3);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .p-num.scored { background: rgba(239,68,68,0.2); border-color: rgba(239,68,68,0.4); color: #f87171; }
 .p-num.gold   { background: var(--gold-dim); border-color: rgba(245,158,11,0.4); color: var(--gold); }
 .p-num.silver { background: rgba(148,163,184,0.15); border-color: rgba(148,163,184,0.3); color: var(--silver); }
 .p-num.bronze { background: rgba(205,127,50,0.15); border-color: rgba(205,127,50,0.3); color: var(--bronze); }
+.p-num.winner { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
 .p-name { font-size: 12.5px; color: var(--text-2); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .p-row.active .p-name { color: var(--text-1); }
 .p-score { font-size: 12px; font-weight: 600; min-width: 24px; text-align: right; color: var(--text-3); }
@@ -201,18 +184,19 @@ html, body {
 .content { flex: 1; overflow-y: auto; padding: 24px; background: var(--bg-base); min-width: 0; }
 .inner { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
 
+/* ── SECTION PANEL ── */
+.section-panel { display: none; }
+.section-panel.active { display: flex; flex-direction: column; gap: 14px; }
+
 /* ── PESERTA HEADER ── */
 .p-header {
-  background: var(--bg-card);
-  border: 1px solid var(--border-md);
+  background: var(--bg-card); border: 1px solid var(--border-md);
   border-radius: 16px; padding: 18px 20px;
   box-shadow: var(--shadow-card);
-  display: flex; align-items: center; gap: 16px;
-  position: relative;
+  display: flex; align-items: center; gap: 16px; position: relative;
 }
 .p-header::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(192,132,252,0.4), transparent);
   pointer-events: none;
 }
@@ -222,8 +206,7 @@ html, body {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 19px; font-weight: 700; color: var(--accent);
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 0 18px var(--accent-glow);
+  flex-shrink: 0; box-shadow: 0 0 18px var(--accent-glow);
 }
 .p-details { flex: 1; min-width: 0; }
 .p-name-edit {
@@ -231,20 +214,16 @@ html, body {
   font-size: 18px; font-weight: 600; color: var(--text-1);
   background: transparent; border: none; outline: none;
   border-bottom: 1.5px solid var(--border-md);
-  padding: 2px 0; width: 100%;
-  transition: border-color 0.2s;
-  display: block;
+  padding: 2px 0; width: 100%; transition: border-color 0.2s; display: block;
 }
 .p-name-edit:focus { border-bottom-color: var(--accent); }
 .p-sub { font-size: 11px; color: var(--text-3); margin-top: 5px; }
 .nav-btns { display: flex; gap: 8px; margin-top: 10px; }
 .nav-btn {
   padding: 7px 16px; border-radius: 8px;
-  border: 1px solid var(--border-md);
-  background: var(--bg-raised);
+  border: 1px solid var(--border-md); background: var(--bg-raised);
   font-size: 12px; font-weight: 500; color: var(--text-2);
-  cursor: pointer; transition: all 0.15s;
-  font-family: 'Inter', sans-serif;
+  cursor: pointer; transition: all 0.15s; font-family: 'Inter', sans-serif;
 }
 .nav-btn:hover { background: var(--bg-hover); color: var(--text-1); }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
@@ -256,72 +235,61 @@ html, body {
 .cat-card {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 14px; padding: 16px 18px;
-  transition: all 0.25s; box-shadow: var(--shadow-3d);
-  position: relative;
+  transition: all 0.25s; box-shadow: var(--shadow-3d); position: relative;
 }
 .cat-card::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);
   pointer-events: none;
 }
-.cat-card.on0 { background: linear-gradient(135deg,rgba(245,158,11,0.1) 0%,var(--bg-card) 60%); border-color: var(--c0-border); }
 .cat-card.on1 { background: linear-gradient(135deg,rgba(52,211,153,0.08) 0%,var(--bg-card) 60%); border-color: var(--c1-border); }
 .cat-card.on2 { background: linear-gradient(135deg,rgba(96,165,250,0.08) 0%,var(--bg-card) 60%); border-color: var(--c2-border); }
+.cat-card.on3 { background: linear-gradient(135deg,rgba(244,114,182,0.08) 0%,var(--bg-card) 60%); border-color: var(--c3-border); }
 
 .cat-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .cat-left { display: flex; align-items: center; gap: 10px; }
 .cat-dot {
   width: 34px; height: 34px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 16px; background: var(--bg-raised); border: 1px solid var(--border);
-  flex-shrink: 0;
+  font-size: 16px; background: var(--bg-raised); border: 1px solid var(--border); flex-shrink: 0;
 }
-.cat-card.on0 .cat-dot { background: var(--c0-bg); border-color: var(--c0-border); }
 .cat-card.on1 .cat-dot { background: var(--c1-bg); border-color: var(--c1-border); }
 .cat-card.on2 .cat-dot { background: var(--c2-bg); border-color: var(--c2-border); }
+.cat-card.on3 .cat-dot { background: var(--c3-bg); border-color: var(--c3-border); }
 .cat-name { font-size: 13px; font-weight: 500; color: var(--text-2); }
-.cat-card.on0 .cat-name { color: var(--c0); }
 .cat-card.on1 .cat-name { color: var(--c1); }
 .cat-card.on2 .cat-name { color: var(--c2); }
-.cat-val {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 28px; font-weight: 700; color: var(--text-3); line-height: 1;
-}
-.cat-card.on0 .cat-val { color: var(--c0); }
+.cat-card.on3 .cat-name { color: var(--c3); }
+.cat-val { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: var(--text-3); line-height: 1; }
 .cat-card.on1 .cat-val { color: var(--c1); }
 .cat-card.on2 .cat-val { color: var(--c2); }
+.cat-card.on3 .cat-val { color: var(--c3); }
 .cat-val-max { font-size: 12px; color: var(--text-3); margin-left: 2px; }
 
 /* ── SCORE BUTTONS ── */
 .score-grid { display: flex; gap: 5px; flex-wrap: wrap; }
 .sb {
   width: 40px; height: 40px; border-radius: 9px;
-  border: 1px solid var(--border);
-  background: var(--bg-raised);
+  border: 1px solid var(--border); background: var(--bg-raised);
   font-size: 13px; font-weight: 600; color: var(--text-3);
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.12s;
-  font-family: 'Inter', sans-serif;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s; font-family: 'Inter', sans-serif;
 }
 .sb:hover { background: var(--bg-hover); color: var(--text-1); transform: translateY(-1px); }
 .sb:active { transform: translateY(0); }
-.cat-card.on0 .sb { border-color: rgba(245,158,11,0.2); color: rgba(245,158,11,0.5); }
 .cat-card.on1 .sb { border-color: rgba(52,211,153,0.18); color: rgba(52,211,153,0.45); }
 .cat-card.on2 .sb { border-color: rgba(96,165,250,0.18); color: rgba(96,165,250,0.45); }
-.cat-card.on0 .sb.sel { background: var(--c0); color: #1a0a00; border-color: var(--c0); transform: translateY(-2px); box-shadow: 0 0 14px rgba(245,158,11,0.5); }
+.cat-card.on3 .sb { border-color: rgba(244,114,182,0.18); color: rgba(244,114,182,0.45); }
 .cat-card.on1 .sb.sel { background: var(--c1); color: #002a1a; border-color: var(--c1); transform: translateY(-2px); box-shadow: 0 0 14px rgba(52,211,153,0.4); }
 .cat-card.on2 .sb.sel { background: var(--c2); color: #001433; border-color: var(--c2); transform: translateY(-2px); box-shadow: 0 0 14px rgba(96,165,250,0.4); }
+.cat-card.on3 .sb.sel { background: var(--c3); color: #2a0018; border-color: var(--c3); transform: translateY(-2px); box-shadow: 0 0 14px rgba(244,114,182,0.4); }
 
 /* ── BOTTOM ROW ── */
 .bottom-row { display: grid; grid-template-columns: 200px 1fr; gap: 14px; align-items: start; }
-
-/* ── TOTAL CARD ── */
 .total-card {
   background: var(--bg-card); border: 1px solid var(--border-md);
   border-radius: 14px; padding: 18px 20px;
-  box-shadow: var(--shadow-card);
-  position: relative;
+  box-shadow: var(--shadow-card); position: relative;
 }
 .total-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -355,38 +323,55 @@ html, body {
 .lb-bar { height: 100%; background: linear-gradient(90deg,#c084fc,#f472b6); border-radius: 3px; transition: width 0.4s; }
 .lb-pts { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: var(--accent); min-width: 26px; text-align: right; }
 
-/* ── EXPORT ── */
+/* ── EXPORT BUTTON ── */
 .export-btn {
   width: 100%; padding: 12px; border-radius: 10px;
-  border: 1px solid var(--border-md);
-  background: var(--bg-card);
+  border: 1px solid var(--border-md); background: var(--bg-card);
   font-size: 13px; font-weight: 500; color: var(--text-2);
   cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;
   transition: all 0.15s; font-family: 'Inter', sans-serif;
 }
 .export-btn:hover { background: var(--bg-raised); color: var(--text-1); }
 
+/* ── WINNER BANNER (Penyanyi) ── */
+.winner-auto-banner {
+  background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(245,158,11,0.05));
+  border: 1px solid rgba(245,158,11,0.4);
+  border-radius: 14px; padding: 20px 24px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 0 28px rgba(245,158,11,0.18);
+  position: relative; overflow: hidden;
+}
+.winner-auto-banner::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent);
+}
+.winner-crown { font-size: 32px; }
+.winner-info { flex: 1; }
+.winner-label { font-size: 10px; color: rgba(245,158,11,0.7); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.winner-name { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--gold); }
+.winner-score { font-size: 12px; color: rgba(245,158,11,0.6); margin-top: 3px; }
+.winner-pending {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 24px;
+  text-align: center; color: var(--text-3); font-size: 13px;
+}
+
 /* ── MOBILE BOTTOM NAV ── */
 .mobile-nav {
-  display: none;
-  position: fixed; bottom: 0; left: 0; right: 0;
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border);
-  padding: 10px 16px;
-  z-index: 90; gap: 8px;
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg-surface); border-top: 1px solid var(--border);
+  padding: 10px 16px; z-index: 90; gap: 8px;
 }
 .mobile-nav .nav-btn { flex: 1; padding: 10px; font-size: 13px; justify-content: center; display: flex; }
 
 /* ══ RESPONSIVE ══ */
-
 @media (max-width: 900px) {
   :root { --sidebar-w: 220px; }
   .juri-field input { width: 110px; }
 }
-
 @media (max-width: 640px) {
   :root { --header-h: 56px; --sidebar-w: 280px; }
-
   .header { padding: 0 12px; gap: 8px; }
   .header-sub { display: none; }
   .header-title { font-size: 13px; }
@@ -394,47 +379,52 @@ html, body {
   .juri-field label { display: none; }
   .juri-field input { width: 110px; font-size: 12px; }
   .menu-toggle { display: flex; }
-
-  /* Sidebar jadi drawer */
+  .tab-bar { padding: 0 10px; }
+  .tab-btn { padding: 0 10px; font-size: 12px; }
   .sidebar {
-    position: fixed;
-    top: var(--header-h); left: 0; bottom: 0;
-    z-index: 60;
-    transform: translateX(-100%);
+    position: fixed; top: calc(var(--header-h) + 46px); left: 0; bottom: 0;
+    z-index: 60; transform: translateX(-100%);
     transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
-    width: var(--sidebar-w);
-    box-shadow: 4px 0 24px rgba(0,0,0,0.5);
+    width: var(--sidebar-w); box-shadow: 4px 0 24px rgba(0,0,0,0.5);
   }
   .sidebar.open { transform: translateX(0); }
   .sidebar-close { display: block; }
-
-  /* Overlay hanya papar bila sidebar terbuka */
   .overlay.active { display: block; }
-
   .content { padding: 14px 14px 76px; }
   .inner { gap: 12px; }
-
   .bottom-row { grid-template-columns: 1fr; gap: 12px; }
-
-  /* Total card: layout mendatar di mobile */
   .total-card { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; }
   .rank-pill-wrap { margin-top: 0; }
   .total-num { font-size: 42px; }
-
-  /* Butang markah lebih besar untuk tap */
   .sb { width: 42px; height: 42px; font-size: 14px; }
   .score-grid { gap: 6px; }
-
   .cat-card { padding: 14px; }
   .p-header { padding: 14px; gap: 12px; }
   .p-avatar { width: 46px; height: 46px; font-size: 16px; }
   .p-name-edit { font-size: 16px; }
   .nav-btns { display: none; }
-
   .mobile-nav { display: flex; }
   .lb-row { padding: 8px 12px; gap: 8px; }
   .lb-bar-wrap { width: 44px; }
   .lb-cats { min-width: 40px; }
+}
+/* ── EDITABLE SYSTEM TITLE ── */
+.header-title-edit {
+  background: transparent; border: none; outline: none;
+  font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600;
+  color: var(--text-1); width: 100%; max-width: 260px;
+  border-bottom: 1px dashed transparent; transition: border-color 0.2s;
+  padding: 0; cursor: text;
+}
+.header-title-edit:hover { border-bottom-color: var(--border-md); }
+.header-title-edit:focus { border-bottom-color: var(--accent); }
+.header-title-edit::placeholder { color: var(--text-3); }
+
+/* ── CREDIT TAG ── */
+.credit-tag {
+  text-align: center; font-size: 10px; color: var(--text-3);
+  letter-spacing: 0.5px; padding: 4px 0 8px;
+  opacity: 0.5;
 }
 
 @media (max-width: 360px) {
@@ -449,8 +439,8 @@ html, body {
   <button class="menu-toggle" id="menu-toggle">☰</button>
   <div class="header-icon">✦</div>
   <div class="header-info">
-    <div class="header-title">Sistem Penilaian Peragaan Pakaian</div>
-    <div class="header-sub">20 Peserta &bull; 3 Kategori &bull; Markah 1–10</div>
+    <input class="header-title-edit" id="system-title" type="text" value="Sistem Penilaian" placeholder="Nama sistem...">
+    <div class="header-sub" id="header-sub">20 Peserta &bull; 2 Kategori &bull; Markah 1–10</div>
   </div>
   <div class="juri-field">
     <label>Juri —</label>
@@ -458,14 +448,23 @@ html, body {
   </div>
 </div>
 
-<!-- Overlay: HIDDEN by default, only shown when sidebar is open on mobile -->
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" id="tab-pakaian" onclick="switchTab('pakaian')">
+    👗 Peragaan Pakaian <span class="tab-badge" id="badge-pakaian">20</span>
+  </button>
+  <button class="tab-btn" id="tab-penyanyi" onclick="switchTab('penyanyi')">
+    🎤 Penyanyi <span class="tab-badge" id="badge-penyanyi">20</span>
+  </button>
+</div>
+
 <div class="overlay" id="overlay"></div>
 
 <div class="app-body">
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-head">
-      Senarai Peserta
+      <span id="sidebar-title">Senarai Peserta</span>
       <button class="sidebar-close" id="sidebar-close">✕</button>
     </div>
     <div class="peserta-list" id="peserta-list"></div>
@@ -481,38 +480,75 @@ html, body {
   <div class="content">
     <div class="inner">
 
-      <div class="p-header">
-        <div class="p-avatar" id="p-avatar">01</div>
-        <div class="p-details">
-          <input class="p-name-edit" id="p-name-edit" type="text" value="Peserta 1" placeholder="Nama peserta...">
-          <div class="p-sub" id="p-sub">Pilih markah untuk setiap kategori di bawah</div>
-          <div class="nav-btns">
-            <button class="nav-btn" id="btn-prev">← Sebelum</button>
-            <button class="nav-btn nxt" id="btn-next">Seterusnya →</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="cats-grid" id="cats-grid"></div>
-
-      <div class="bottom-row">
-        <div class="total-card">
-          <div>
-            <div class="total-lbl">Jumlah Markah</div>
-            <div class="total-score-row">
-              <span class="total-num" id="total-num">0</span>
-              <span class="total-denom">/ 30</span>
+      <!-- ── SECTION: PERAGAAN PAKAIAN ── -->
+      <div class="section-panel active" id="panel-pakaian">
+        <div class="p-header">
+          <div class="p-avatar" id="pak-avatar">01</div>
+          <div class="p-details">
+            <input class="p-name-edit" id="pak-name-edit" type="text" value="Peserta 1" placeholder="Nama peserta...">
+            <div class="p-sub" id="pak-sub">Pilih markah untuk setiap kategori di bawah</div>
+            <div class="nav-btns">
+              <button class="nav-btn" id="pak-btn-prev">← Sebelum</button>
+              <button class="nav-btn nxt" id="pak-btn-next">Seterusnya →</button>
             </div>
           </div>
-          <div class="rank-pill-wrap" id="rank-pill"></div>
         </div>
-        <div class="lb-card">
-          <div class="lb-head"><span style="color:var(--gold)">✦</span> Kedudukan Semasa</div>
-          <div id="leaderboard"></div>
+        <div class="cats-grid" id="pak-cats-grid"></div>
+        <div class="bottom-row">
+          <div class="total-card">
+            <div>
+              <div class="total-lbl">Jumlah Markah</div>
+              <div class="total-score-row">
+                <span class="total-num" id="pak-total-num">0</span>
+                <span class="total-denom">/ 20</span>
+              </div>
+            </div>
+            <div class="rank-pill-wrap" id="pak-rank-pill"></div>
+          </div>
+          <div class="lb-card">
+            <div class="lb-head"><span style="color:var(--gold)">✦</span> Kedudukan Semasa</div>
+            <div id="pak-leaderboard"></div>
+          </div>
         </div>
+        <button class="export-btn" onclick="exportCSV('pakaian')">↓ &nbsp;Export Keputusan CSV — Peragaan Pakaian</button>
+        <div class="credit-tag">credit by Mrdeensx | Smith</div>
       </div>
 
-      <button class="export-btn" id="export-btn">↓ &nbsp;Export Keputusan CSV</button>
+      <!-- ── SECTION: PENYANYI ── -->
+      <div class="section-panel" id="panel-penyanyi">
+        <div class="p-header">
+          <div class="p-avatar" id="nyi-avatar">01</div>
+          <div class="p-details">
+            <input class="p-name-edit" id="nyi-name-edit" type="text" value="Penyanyi 1" placeholder="Nama penyanyi...">
+            <div class="p-sub" id="nyi-sub">Pilih markah untuk setiap kategori di bawah</div>
+            <div class="nav-btns">
+              <button class="nav-btn" id="nyi-btn-prev">← Sebelum</button>
+              <button class="nav-btn nxt" id="nyi-btn-next">Seterusnya →</button>
+            </div>
+          </div>
+        </div>
+        <div class="cats-grid" id="nyi-cats-grid"></div>
+        <div class="bottom-row">
+          <div class="total-card">
+            <div>
+              <div class="total-lbl">Jumlah Markah</div>
+              <div class="total-score-row">
+                <span class="total-num" id="nyi-total-num">0</span>
+                <span class="total-denom">/ 20</span>
+              </div>
+            </div>
+            <div class="rank-pill-wrap" id="nyi-rank-pill"></div>
+          </div>
+          <div class="lb-card">
+            <div class="lb-head"><span style="color:var(--gold)">✦</span> Kedudukan Semasa</div>
+            <div id="nyi-leaderboard"></div>
+          </div>
+        </div>
+        <!-- Pemenang Auto -->
+        <div id="nyi-winner-wrap"></div>
+        <button class="export-btn" onclick="exportCSV('penyanyi')">↓ &nbsp;Export Keputusan CSV — Penyanyi</button>
+        <div class="credit-tag">credit by Mrdeensx | Smith</div>
+      </div>
 
     </div>
   </div>
@@ -524,102 +560,160 @@ html, body {
 </div>
 
 <script>
-const CATS = [
-  { name:'Cara memeragakan',   icon:'🚶', cls:'on0' },
-  { name:'Penampilan pentas',  icon:'🎭', cls:'on1' },
+// ══ DATA ══
+const CATS_PAKAIAN  = [
+  { name:'Penampilan',         icon:'🎭', cls:'on1' },
   { name:'Kesesuaian pakaian', icon:'👗', cls:'on2' }
 ];
-const N = 20;
-let names  = Array.from({length:N}, (_,i) => `Peserta ${i+1}`);
-let scores = Array.from({length:N}, () => [0,0,0]);
-let cur = 0;
+const CATS_PENYANYI = [
+  { name:'Suara',       icon:'🎵', cls:'on2' },
+  { name:'Persembahan', icon:'🎤', cls:'on3' }
+];
 
-const total  = p => scores[p].reduce((a,b)=>a+b,0);
-const ranked = () =>
-  [...Array(N).keys()].filter(p=>total(p)>0).sort((a,b)=>total(b)-total(a));
+const NP = 20; // bilangan peserta pakaian
+const NN = 20;  // bilangan penyanyi
 
-/* ── Sidebar (mobile drawer) ── */
+let pakNames  = Array.from({length:NP}, (_,i) => `Peserta ${i+1}`);
+let pakScores = Array.from({length:NP}, () => [0,0]);
+let pakCur    = 0;
+
+let nyiNames  = Array.from({length:NN}, (_,i) => `Penyanyi ${i+1}`);
+let nyiScores = Array.from({length:NN}, () => [0,0]);
+let nyiCur    = 0;
+
+let activeTab = 'pakaian';
+
+// ══ HELPERS ══
+const totalPak = p => pakScores[p].reduce((a,b)=>a+b,0);
+const totalNyi = p => nyiScores[p].reduce((a,b)=>a+b,0);
+const rankedPak = () => [...Array(NP).keys()].filter(p=>totalPak(p)>0).sort((a,b)=>totalPak(b)-totalPak(a));
+const rankedNyi = () => [...Array(NN).keys()].filter(p=>totalNyi(p)>0).sort((a,b)=>totalNyi(b)-totalNyi(a));
+
+// ══ TAB SWITCH ══
+function switchTab(tab){
+  activeTab = tab;
+  document.getElementById('tab-pakaian').classList.toggle('active', tab==='pakaian');
+  document.getElementById('tab-penyanyi').classList.toggle('active', tab==='penyanyi');
+  document.getElementById('panel-pakaian').classList.toggle('active', tab==='pakaian');
+  document.getElementById('panel-penyanyi').classList.toggle('active', tab==='penyanyi');
+  const isPak = tab==='pakaian';
+  document.getElementById('header-sub').textContent = isPak
+    ? '20 Peserta \u2022 2 Kategori \u2022 Markah 1\u201310'
+    : '20 Penyanyi \u2022 2 Kategori \u2022 Markah 1\u201310';
+  document.getElementById('sidebar-title').textContent = isPak ? 'Senarai Peserta' : 'Senarai Penyanyi';
+  render();
+}
+
+// ══ SIDEBAR ══
 const sidebarEl = document.getElementById('sidebar');
 const overlayEl = document.getElementById('overlay');
-
-function openSidebar(){
-  sidebarEl.classList.add('open');
-  overlayEl.classList.add('active');
-}
-function closeSidebar(){
-  sidebarEl.classList.remove('open');
-  overlayEl.classList.remove('active');
-}
+function openSidebar(){ sidebarEl.classList.add('open'); overlayEl.classList.add('active'); }
+function closeSidebar(){ sidebarEl.classList.remove('open'); overlayEl.classList.remove('active'); }
 document.getElementById('menu-toggle').addEventListener('click', openSidebar);
 document.getElementById('sidebar-close').addEventListener('click', closeSidebar);
 overlayEl.addEventListener('click', closeSidebar);
 
-/* ── Navigation buttons ── */
-document.getElementById('btn-prev').addEventListener('click', () => nav(-1));
-document.getElementById('btn-next').addEventListener('click', () => nav(1));
-document.getElementById('mob-prev').addEventListener('click', () => nav(-1));
-document.getElementById('mob-next').addEventListener('click', () => nav(1));
-document.getElementById('export-btn').addEventListener('click', exportCSV);
+// ══ NAV BUTTONS ══
+document.getElementById('pak-btn-prev').addEventListener('click', ()=>navPak(-1));
+document.getElementById('pak-btn-next').addEventListener('click', ()=>navPak(1));
+document.getElementById('nyi-btn-prev').addEventListener('click', ()=>navNyi(-1));
+document.getElementById('nyi-btn-next').addEventListener('click', ()=>navNyi(1));
+document.getElementById('mob-prev').addEventListener('click', ()=>activeTab==='pakaian'?navPak(-1):navNyi(-1));
+document.getElementById('mob-next').addEventListener('click', ()=>activeTab==='pakaian'?navPak(1):navNyi(1));
 
-/* ── Name input ── */
-document.getElementById('p-name-edit').addEventListener('input', function(){
-  names[cur] = this.value;
-  renderList();
-  renderLeaderboard();
+function navPak(d){ pakCur = Math.max(0, Math.min(NP-1, pakCur+d)); render(); }
+function navNyi(d){ nyiCur = Math.max(0, Math.min(NN-1, nyiCur+d)); render(); }
+
+// ══ NAME INPUT ══
+document.getElementById('pak-name-edit').addEventListener('input', function(){
+  pakNames[pakCur] = this.value; renderList(); renderLbPak();
+});
+document.getElementById('nyi-name-edit').addEventListener('input', function(){
+  nyiNames[nyiCur] = this.value; renderList(); renderLbNyi(); renderWinner();
 });
 
-/* ── Score buttons: event delegation on cats-grid ── */
-document.getElementById('cats-grid').addEventListener('click', function(e){
-  const btn = e.target.closest('.sb');
-  if(!btn) return;
-  const card = btn.closest('.cat-card');
-  if(!card) return;
+// ══ SCORE BUTTONS ══
+document.getElementById('pak-cats-grid').addEventListener('click', function(e){
+  const btn = e.target.closest('.sb'); if(!btn) return;
+  const card = btn.closest('.cat-card'); if(!card) return;
   const ci = parseInt(card.dataset.ci);
   const v  = parseInt(btn.dataset.v);
-  scores[cur][ci] = v;
+  pakScores[pakCur][ci] = pakScores[pakCur][ci] === v ? 0 : v;
+  render();
+});
+document.getElementById('nyi-cats-grid').addEventListener('click', function(e){
+  const btn = e.target.closest('.sb'); if(!btn) return;
+  const card = btn.closest('.cat-card'); if(!card) return;
+  const ci = parseInt(card.dataset.ci);
+  const v  = parseInt(btn.dataset.v);
+  nyiScores[nyiCur][ci] = nyiScores[nyiCur][ci] === v ? 0 : v;
   render();
 });
 
-/* ── Render functions ── */
+// ══ RENDER: SIDEBAR LIST ══
 function renderList(){
-  const rnk = ranked();
-  const el  = document.getElementById('peserta-list');
+  const el = document.getElementById('peserta-list');
   el.innerHTML = '';
-  let done = 0;
-  for(let i = 0; i < N; i++){
-    const t = total(i); if(t > 0) done++;
-    const ri = rnk.indexOf(i);
-    const nc = ri===0?'p-num gold':ri===1?'p-num silver':ri===2?'p-num bronze':t>0?'p-num scored':'p-num';
-    const row = document.createElement('div');
-    row.className = 'p-row' + (i===cur?' active':'');
-    row.dataset.idx = i;
-    row.innerHTML = `<div class="${nc}">${String(i+1).padStart(2,'0')}</div>
-      <div class="p-name">${names[i]}</div>
-      <div class="p-score${t>0?' has':''}">${t||''}</div>`;
-    el.appendChild(row);
+  if(activeTab === 'pakaian'){
+    const rnk = rankedPak();
+    let done = 0;
+    for(let i=0;i<NP;i++){
+      const t = totalPak(i); if(t>0) done++;
+      const ri = rnk.indexOf(i);
+      const nc = ri===0?'p-num gold':ri===1?'p-num silver':ri===2?'p-num bronze':t>0?'p-num scored':'p-num';
+      const row = document.createElement('div');
+      row.className = 'p-row'+(i===pakCur?' active':'');
+      row.dataset.idx = i;
+      row.innerHTML = `<div class="${nc}">${String(i+1).padStart(2,'0')}</div>
+        <div class="p-name">${pakNames[i]}</div>
+        <div class="p-score${t>0?' has':''}">${t||''}</div>`;
+      el.appendChild(row);
+    }
+    el.addEventListener('click', e=>{
+      const r=e.target.closest('.p-row'); if(!r) return;
+      pakCur=parseInt(r.dataset.idx); render(); closeSidebar();
+    });
+    const pct = Math.round(done/NP*100);
+    document.getElementById('prog-label').textContent = `${done} / ${NP} peserta dinilai`;
+    document.getElementById('prog-pct').textContent   = pct+'%';
+    document.getElementById('prog-fill').style.width  = pct+'%';
+  } else {
+    const rnk = rankedNyi();
+    // cari pemenang (markah tertinggi, semua dinilai)
+    const allScored = rankedNyi().filter(p=>nyiScores[p].every(s=>s>0));
+    const winnerIdx = allScored.length > 0 ? allScored[0] : -1;
+    let done = 0;
+    for(let i=0;i<NN;i++){
+      const t = totalNyi(i); if(t>0) done++;
+      const ri = rnk.indexOf(i);
+      const isWin = i===winnerIdx && winnerIdx>=0 && nyiScores[i].every(s=>s>0);
+      const nc = isWin?'p-num winner':ri===0?'p-num gold':ri===1?'p-num silver':ri===2?'p-num bronze':t>0?'p-num scored':'p-num';
+      const row = document.createElement('div');
+      row.className = 'p-row'+(i===nyiCur?' active':'');
+      row.dataset.idx = i;
+      row.innerHTML = `<div class="${nc}">${String(i+1).padStart(2,'0')}</div>
+        <div class="p-name">${nyiNames[i]}</div>
+        <div class="p-score${t>0?' has':''}">${t||''}</div>`;
+      el.appendChild(row);
+    }
+    el.addEventListener('click', e=>{
+      const r=e.target.closest('.p-row'); if(!r) return;
+      nyiCur=parseInt(r.dataset.idx); render(); closeSidebar();
+    });
+    const pct = Math.round(done/NN*100);
+    document.getElementById('prog-label').textContent = `${done} / ${NN} penyanyi dinilai`;
+    document.getElementById('prog-pct').textContent   = pct+'%';
+    document.getElementById('prog-fill').style.width  = pct+'%';
   }
-  el.addEventListener('click', handleListClick); // re-attach (delegation)
-  const pct = Math.round(done/N*100);
-  document.getElementById('prog-label').textContent = `${done} / ${N} peserta dinilai`;
-  document.getElementById('prog-pct').textContent   = pct+'%';
-  document.getElementById('prog-fill').style.width  = pct+'%';
 }
 
-function handleListClick(e){
-  const row = e.target.closest('.p-row');
-  if(!row) return;
-  cur = parseInt(row.dataset.idx);
-  render();
-  closeSidebar();
-}
-
-function renderCats(){
-  const p = cur;
-  document.getElementById('cats-grid').innerHTML = CATS.map((cat, ci) => {
-    const v   = scores[p][ci];
-    const on  = v > 0 ? ` ${cat.cls}` : '';
-    const btns = Array.from({length:10}, (_,k) => {
-      const n = k+1;
+// ══ RENDER: CATS ══
+function renderCatsFor(gridId, cats, scores, cur){
+  document.getElementById(gridId).innerHTML = cats.map((cat,ci)=>{
+    const v = scores[cur][ci];
+    const on = v>0?` ${cat.cls}`:'';
+    const btns = Array.from({length:10},(_,k)=>{
+      const n=k+1;
       return `<button class="sb${v===n?' sel':''}" data-v="${n}">${n}</button>`;
     }).join('');
     return `<div class="cat-card${on}" data-ci="${ci}">
@@ -638,79 +732,152 @@ function renderCats(){
   }).join('');
 }
 
-function renderTotal(){
-  const p = cur, t = total(p);
-  const el = document.getElementById('total-num');
-  el.textContent = t;
-  el.className   = 'total-num' + (t>0?' has':'');
-  const rnk = ranked(), ri = rnk.indexOf(p);
-  const rp  = document.getElementById('rank-pill');
-  if(ri===0)      rp.innerHTML = `<div class="rank-pill rk1">🥇 No. 1</div>`;
-  else if(ri===1) rp.innerHTML = `<div class="rank-pill rk2">🥈 No. 2</div>`;
-  else if(ri===2) rp.innerHTML = `<div class="rank-pill rk3">🥉 No. 3</div>`;
-  else            rp.innerHTML = '';
+// ══ RENDER: TOTAL ══
+function renderTotalFor(numId, pillId, t, rnk, p){
+  const el = document.getElementById(numId);
+  el.textContent = t; el.className = 'total-num'+(t>0?' has':'');
+  const ri = rnk.indexOf(p);
+  const rp = document.getElementById(pillId);
+  if(ri===0)      rp.innerHTML=`<div class="rank-pill rk1">🥇 No. 1</div>`;
+  else if(ri===1) rp.innerHTML=`<div class="rank-pill rk2">🥈 No. 2</div>`;
+  else if(ri===2) rp.innerHTML=`<div class="rank-pill rk3">🥉 No. 3</div>`;
+  else            rp.innerHTML='';
 }
 
-function renderHeader(){
-  const p   = cur;
-  const inp = document.getElementById('p-name-edit');
-  document.getElementById('p-avatar').textContent = String(p+1).padStart(2,'0');
-  if(document.activeElement !== inp) inp.value = names[p];
-  const done = scores[p].every(s=>s>0);
-  document.getElementById('p-sub').textContent = done
-    ? '✓ Semua kategori telah dinilai'
-    : 'Pilih markah untuk setiap kategori di bawah';
-  document.getElementById('btn-prev').disabled  = p===0;
-  document.getElementById('btn-next').disabled  = p===N-1;
-  document.getElementById('mob-prev').disabled  = p===0;
-  document.getElementById('mob-next').disabled  = p===N-1;
+// ══ RENDER: HEADER ══
+function renderHeaderPak(){
+  const p = pakCur;
+  document.getElementById('pak-avatar').textContent = String(p+1).padStart(2,'0');
+  const inp = document.getElementById('pak-name-edit');
+  if(document.activeElement!==inp) inp.value = pakNames[p];
+  document.getElementById('pak-sub').textContent = pakScores[p].every(s=>s>0)
+    ? '✓ Semua kategori telah dinilai' : 'Pilih markah untuk setiap kategori di bawah';
+  document.getElementById('pak-btn-prev').disabled = p===0;
+  document.getElementById('pak-btn-next').disabled = p===NP-1;
+  document.getElementById('mob-prev').disabled = p===0;
+  document.getElementById('mob-next').disabled = p===NP-1;
+}
+function renderHeaderNyi(){
+  const p = nyiCur;
+  document.getElementById('nyi-avatar').textContent = String(p+1).padStart(2,'0');
+  const inp = document.getElementById('nyi-name-edit');
+  if(document.activeElement!==inp) inp.value = nyiNames[p];
+  document.getElementById('nyi-sub').textContent = nyiScores[p].every(s=>s>0)
+    ? '✓ Semua kategori telah dinilai' : 'Pilih markah untuk setiap kategori di bawah';
+  document.getElementById('nyi-btn-prev').disabled = p===0;
+  document.getElementById('nyi-btn-next').disabled = p===NN-1;
+  document.getElementById('mob-prev').disabled = p===0;
+  document.getElementById('mob-next').disabled = p===NN-1;
 }
 
-function renderLeaderboard(){
-  const rnk = ranked().slice(0,8);
-  const lb  = document.getElementById('leaderboard');
-  if(!rnk.length){
-    lb.innerHTML = `<div style="padding:16px;font-size:12px;color:var(--text-3);text-align:center;">Belum ada markah dimasukkan</div>`;
-    return;
-  }
-  const mx = total(rnk[0]);
-  lb.innerHTML = rnk.map((p,i) => {
-    const t   = total(p), pct = mx>0?Math.round(t/mx*100):0;
-    const rk  = i===0?'r1':i===1?'r2':i===2?'r3':'';
-    const ico = ['🥇','🥈','🥉'];
-    const cats = scores[p].map(s=>s||'·').join(' ');
+// ══ RENDER: LEADERBOARD ══
+function renderLbPak(){
+  const rnk = rankedPak().slice(0,8);
+  const lb = document.getElementById('pak-leaderboard');
+  if(!rnk.length){ lb.innerHTML=`<div style="padding:16px;font-size:12px;color:var(--text-3);text-align:center;">Belum ada markah dimasukkan</div>`; return; }
+  const mx = totalPak(rnk[0]);
+  lb.innerHTML = rnk.map((p,i)=>{
+    const t=totalPak(p), pct=mx>0?Math.round(t/mx*100):0;
+    const rk=i===0?'r1':i===1?'r2':i===2?'r3':'';
+    const ico=['🥇','🥈','🥉'];
     return `<div class="lb-row">
       <div class="lb-rank ${rk}">${ico[i]||i+1}</div>
-      <div class="lb-pname">${names[p]}</div>
-      <div class="lb-cats">${cats}</div>
+      <div class="lb-pname">${pakNames[p]}</div>
+      <div class="lb-cats">${pakScores[p].map(s=>s||'·').join(' ')}</div>
+      <div class="lb-bar-wrap"><div class="lb-bar" style="width:${pct}%"></div></div>
+      <div class="lb-pts">${t}</div>
+    </div>`;
+  }).join('');
+}
+function renderLbNyi(){
+  const rnk = rankedNyi().slice(0,5);
+  const lb = document.getElementById('nyi-leaderboard');
+  if(!rnk.length){ lb.innerHTML=`<div style="padding:16px;font-size:12px;color:var(--text-3);text-align:center;">Belum ada markah dimasukkan</div>`; return; }
+  const mx = totalNyi(rnk[0]);
+  lb.innerHTML = rnk.map((p,i)=>{
+    const t=totalNyi(p), pct=mx>0?Math.round(t/mx*100):0;
+    const rk=i===0?'r1':i===1?'r2':i===2?'r3':'';
+    const ico=['🥇','🥈','🥉'];
+    return `<div class="lb-row">
+      <div class="lb-rank ${rk}">${ico[i]||i+1}</div>
+      <div class="lb-pname">${nyiNames[p]}</div>
+      <div class="lb-cats">${nyiScores[p].map(s=>s||'·').join(' ')}</div>
       <div class="lb-bar-wrap"><div class="lb-bar" style="width:${pct}%"></div></div>
       <div class="lb-pts">${t}</div>
     </div>`;
   }).join('');
 }
 
-function nav(d){ cur = Math.max(0, Math.min(N-1, cur+d)); render(); }
-
-function render(){
-  renderHeader();
-  renderList();
-  renderCats();
-  renderTotal();
-  renderLeaderboard();
+// ══ RENDER: PEMENANG PENYANYI (AUTO) ══
+function renderWinner(){
+  const wrap = document.getElementById('nyi-winner-wrap');
+  const allDone = [...Array(NN).keys()].every(p => nyiScores[p].every(s=>s>0));
+  if(!allDone){
+    const done = [...Array(NN).keys()].filter(p=>nyiScores[p].some(s=>s>0)).length;
+    wrap.innerHTML = `<div class="winner-pending">
+      🎤 Pemenang akan diumumkan setelah semua ${NN} penyanyi dinilai
+      <span style="color:var(--accent);font-weight:600;"> (${done}/${NN} selesai)</span>
+    </div>`;
+    return;
+  }
+  const rnk = rankedNyi();
+  if(!rnk.length){ wrap.innerHTML=''; return; }
+  const w = rnk[0];
+  wrap.innerHTML = `<div class="winner-auto-banner">
+    <div class="winner-crown">🏆</div>
+    <div class="winner-info">
+      <div class="winner-label">Pemenang — Markah Tertinggi</div>
+      <div class="winner-name">${nyiNames[w]}</div>
+      <div class="winner-score">Penyanyi ${w+1} &bull; Suara: ${nyiScores[w][0]} &bull; Persembahan: ${nyiScores[w][1]} &bull; Jumlah: ${totalNyi(w)}/20</div>
+    </div>
+  </div>`;
 }
 
-function exportCSV(){
+// ══ MAIN RENDER ══
+function render(){
+  if(activeTab==='pakaian'){
+    renderHeaderPak();
+    renderCatsFor('pak-cats-grid', CATS_PAKAIAN, pakScores, pakCur);
+    renderTotalFor('pak-total-num','pak-rank-pill', totalPak(pakCur), rankedPak(), pakCur);
+    renderLbPak();
+  } else {
+    renderHeaderNyi();
+    renderCatsFor('nyi-cats-grid', CATS_PENYANYI, nyiScores, nyiCur);
+    renderTotalFor('nyi-total-num','nyi-rank-pill', totalNyi(nyiCur), rankedNyi(), nyiCur);
+    renderLbNyi();
+    renderWinner();
+  }
+  renderList();
+}
+
+// ══ EXPORT CSV ══
+function exportCSV(type){
   const juri = document.getElementById('juri-name').value || 'Juri';
-  let c = `Sistem Penilaian Peragaan Pakaian\nJuri: ${juri}\n\n`;
-  c += 'No,Nama Peserta,Cara Memeragakan,Penampilan Pentas,Kesesuaian Pakaian,Jumlah,Kedudukan\n';
-  const rnk = ranked();
-  [...Array(N).keys()].sort((a,b)=>total(b)-total(a)).forEach(p => {
-    const t   = total(p), pos = t>0?rnk.indexOf(p)+1:'—';
-    c += `${p+1},"${names[p]}",${scores[p][0]||'—'},${scores[p][1]||'—'},${scores[p][2]||'—'},${t||'—'},${pos}\n`;
-  });
+  let c = '';
+  if(type==='pakaian'){
+    c = `Sistem Penilaian Peragaan Pakaian\nJuri: ${juri}\n\n`;
+    c += 'No,Nama Peserta,Penampilan,Kesesuaian Pakaian,Jumlah,Kedudukan\n';
+    const rnk = rankedPak();
+    [...Array(NP).keys()].sort((a,b)=>totalPak(b)-totalPak(a)).forEach(p=>{
+      const t=totalPak(p), pos=t>0?rnk.indexOf(p)+1:'—';
+      c += `${p+1},"${pakNames[p]}",${pakScores[p][0]||'—'},${pakScores[p][1]||'—'},${t||'—'},${pos}\n`;
+    });
+  } else {
+    const rnk = rankedNyi();
+    const allDone = [...Array(NN).keys()].every(p=>nyiScores[p].every(s=>s>0));
+    const winnerIdx = allDone && rnk.length>0 ? rnk[0] : -1;
+    c = `Sistem Penilaian Penyanyi\nJuri: ${juri}\n`;
+    if(winnerIdx>=0) c += `Pemenang: ${nyiNames[winnerIdx]}\n`;
+    c += '\nNo,Nama Penyanyi,Suara,Persembahan,Jumlah,Kedudukan,Pemenang\n';
+    [...Array(NN).keys()].sort((a,b)=>totalNyi(b)-totalNyi(a)).forEach(p=>{
+      const t=totalNyi(p), pos=t>0?rnk.indexOf(p)+1:'—';
+      const w=p===winnerIdx?'YA':'';
+      c += `${p+1},"${nyiNames[p]}",${nyiScores[p][0]||'—'},${nyiScores[p][1]||'—'},${t||'—'},${pos},${w}\n`;
+    });
+  }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([c],{type:'text/csv;charset=utf-8;'}));
-  a.download = `penilaian-${new Date().toISOString().slice(0,10)}.csv`;
+  a.download = `penilaian-${type}-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
 }
 
